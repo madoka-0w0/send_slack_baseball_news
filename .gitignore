@@ -1,0 +1,5 @@
+.idea/
+venv/
+*.iml
+lambda.json
+test_main.py
