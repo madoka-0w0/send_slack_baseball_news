@@ -1,7 +1,7 @@
-from slack_sender.application.service.system_runner import SystemRunner
 from datetime import datetime, timedelta
 
 from injector import inject
+from slack_sender.application.service.system_runner import SystemRunner
 from slack_sender.application.service.users_runner import UsersRunner
 from slack_sender.infrastructure.repository.system_repository import SystemRepository
 from slack_sender.infrastructure.repository.user_repository import UserRepository
@@ -20,7 +20,7 @@ class BaseballSystemRunner(SystemRunner):
 
     def has_changed_day(self):
         sys = self.system_table.get()
-        before = sys.last_startup().replace(hour=0, minute=0, second=0, microsecond=0)
+        before = sys.last_startup.replace(hour=0, minute=0, second=0, microsecond=0)
         now = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
-        return (now - before) == timedelta(days=1)
+        return (now - before) >= timedelta(days=1)
